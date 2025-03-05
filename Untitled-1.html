@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        input {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 90%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 12px;
+            width: 100%;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🔒 Secure Form</h2>
+        <input type="password" id="password" placeholder="Enter Password">
+        <button onclick="unlockFields()">Unlock</button>
+        <br>
+        <input type="text" id="mobile" placeholder="Enter Mobile Number" disabled>
+        <input type="email" id="email" placeholder="Enter Email Address" disabled>
+        <button onclick="validateForm()" disabled id="submitBtn" class="disabled">Submit</button>
+    </div>
+    
+    <script>
+        function unlockFields() {
+            const password = document.getElementById("password").value;
+            if (password === "Paarth123") { // Change the password as needed
+                document.getElementById("mobile").disabled = false;
+                document.getElementById("email").disabled = false;
+                document.getElementById("submitBtn").disabled = false;
+                document.getElementById("submitBtn").classList.remove("disabled");
+                alert("✅ Form Unlocked!");
+            } else {
+                alert("❌ Incorrect Password!");
+            }
+        }
+
+        function validateForm() {
+            const mobile = document.getElementById("mobile").value;
+            const email = document.getElementById("email").value;
+            const mobilePattern = /^\d{10}$/;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!mobilePattern.test(mobile)) {
+                alert("⚠️ Invalid mobile number! Please enter a 10-digit number.");
+                return;
+            }
+            
+            if (!emailPattern.test(email)) {
+                alert("⚠️ Invalid email address! Please enter a valid email format.");
+                return;
+            }
+            
+            alert("🎉 Form submitted successfully!");
+        }
+    </script>
+</body>
+</html>
